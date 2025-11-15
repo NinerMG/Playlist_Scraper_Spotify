@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Playlist Created{% endblock %}
+
+{% block content %}
+<div class="success-card zoom-in">
+    {% if playlist_url %}
+        <div class="success-icon">
+            <i class="fas fa-check-circle bounce"></i>
+        </div>
+        <h2 class="success-title">Playlist Created Successfully!</h2>
+        <p class="success-message">Your Billboard playlist is ready to rock! 🎵</p>
+        
+        <a href="{{ playlist_url }}" target="_blank" class="spotify-link">
+            <i class="fab fa-spotify"></i>
+            Open in Spotify
+            <i class="fas fa-external-link-alt"></i>
+        </a>
+
+        <div class="confetti">
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+            <div class="confetti-piece"></div>
+        </div>
+    {% else %}
+        <div class="error-icon">
+            <i class="fas fa-exclamation-triangle shake"></i>
+        </div>
+        <h2 class="error-title">Oops! Something went wrong</h2>
+        <p class="error-message">We couldn't create your playlist. Please try again.</p>
+    {% endif %}
+
+    <a href="{{ url_for('routes.index') }}" class="back-link">
+        <i class="fas fa-arrow-left"></i>
+        Create Another Playlist
+    </a>
+</div>
+{% endblock %}

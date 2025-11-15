@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Generate Your Playlist{% endblock %}
+
+{% block content %}
+<div class="form-card fade-in">
+    <div class="icon-wrapper">
+        <i class="fas fa-calendar-alt pulse"></i>
+    </div>
+    
+    <form action="{{ url_for('routes.start') }}" method="post" id="playlistForm">
+        <div class="form-group">
+            <label for="date">
+                <i class="fas fa-calendar"></i>
+                Select a date:
+            </label>
+            <input type="date" id="date" name="date" required max="{{ max_date }}" min="1958-08-04" class="input-animated">
+        </div>
+        
+        <div class="form-group">
+            <label for="playlist_name">
+                <i class="fas fa-heading"></i>
+                Playlist name (optional):
+            </label>
+            <input type="text" id="playlist_name" name="playlist_name" 
+                   placeholder="e.g., My Favorite Hits" class="input-animated">
+            <small>
+                <i class="fas fa-info-circle"></i>
+                Leave empty to use default: "[Date] Billboard 100"
+            </small>
+        </div>
+        
+        <button type="submit" class="btn-generate">
+            <span class="btn-text">
+                <i class="fas fa-play-circle"></i>
+                Generate Playlist
+            </span>
+            <span class="btn-loader" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i>
+                Creating...
+            </span>
+        </button>
+    </form>
+
+    <div class="info-box">
+        <i class="fas fa-shield-alt"></i>
+        <p>You will be securely redirected to Spotify to authorize the app.</p>
+    </div>
+</div>
+
+<div class="features">
+    <div class="feature-item slide-in-left">
+        <i class="fas fa-chart-line"></i>
+        <h3>Billboard Hot 100</h3>
+        <p>Access charts from 1958 to today</p>
+    </div>
+    <div class="feature-item slide-in-bottom">
+        <i class="fas fa-list-music"></i>
+        <h3>Auto-Create</h3>
+        <p>Instantly build your playlist</p>
+    </div>
+    <div class="feature-item slide-in-right">
+        <i class="fas fa-lock"></i>
+        <h3>Secure OAuth</h3>
+        <p>Safe Spotify authentication</p>
+    </div>
+</div>
+{% endblock %}
