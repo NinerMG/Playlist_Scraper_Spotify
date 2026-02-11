@@ -25,12 +25,12 @@ class TestStartRoute:
     """Testy dla endpointu /start"""
     
     @patch('app.routes.SpotifyClient')
-    def test_start_valid_date(self, mock_spotify, client):
+    def test_start_valid_date(self, mock_spotify_class, client):
         """Test z poprawną datą"""
         # Mock Spotify
         mock_instance = MagicMock()
         mock_instance.get_auth_url.return_value = "https://spotify.com/auth"
-        mock_spotify.return_value = mock_instance
+        mock_spotify_class.return_value = mock_instance
         
         with client.session_transaction() as sess:
             sess['_fresh'] = True
@@ -62,10 +62,10 @@ class TestCallbackRoute:
     """Testy dla endpointu /callback"""
     
     @patch('app.routes.SpotifyClient')
-    def test_callback_with_code(self, mock_spotify, client):
+    def test_callback_with_code(self, mock_spotify_class, client):
         """Test callback z kodem autoryzacyjnym"""
         mock_instance = MagicMock()
-        mock_spotify.return_value = mock_instance
+        mock_spotify_class.return_value = mock_instance
         
         with client.session_transaction() as sess:
             sess['selected_date'] = '2024-01-15'
@@ -93,9 +93,9 @@ class TestCreatePlaylistRoute:
         assert response.status_code == 200
         assert b'expired' in response.data.lower() or b'error' in response.data.lower()
     
-    @patch('app.routes.get_top_100')
     @patch('app.routes.SpotifyClient')
-    def test_create_playlist_success(self, mock_spotify, mock_scraper, client):
+    @patch('app.routes.get_top_100')
+    def test_create_playlist_success(self, mock_scraper, mock_spotify_class, client):
         """Test pomyślnego utworzenia playlisty"""
         # Mock scraper
         mock_scraper.return_value = ['Song 1', 'Song 2', 'Song 3']
@@ -103,7 +103,7 @@ class TestCreatePlaylistRoute:
         # Mock Spotify
         mock_instance = MagicMock()
         mock_instance.create_playlist_from_songs.return_value = 'https://spotify.com/playlist/123'
-        mock_spotify.return_value = mock_instance
+        mock_spotify_class.return_value = mock_instance
         
         with client.session_transaction() as sess:
             sess['selected_date'] = '2024-01-15'

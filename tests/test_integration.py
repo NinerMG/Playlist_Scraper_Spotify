@@ -8,9 +8,9 @@ from unittest.mock import patch, MagicMock
 class TestFullFlow:
     """Testy pełnego flow aplikacji"""
     
-    @patch('app.routes.get_top_100')
     @patch('app.routes.SpotifyClient')
-    def test_complete_workflow(self, mock_spotify_class, mock_scraper, client):
+    @patch('app.routes.get_top_100')
+    def test_complete_workflow(self, mock_scraper, mock_spotify_class, client):
         """Test kompletnego przepływu od strony głównej do utworzenia playlisty"""
         
         # 1. Mock scrapera
@@ -56,9 +56,9 @@ class TestFullFlow:
 class TestErrorHandling:
     """Testy obsługi błędów"""
     
-    @patch('app.routes.get_top_100')
     @patch('app.routes.SpotifyClient')
-    def test_scraper_failure_handling(self, mock_spotify_class, mock_scraper, client):
+    @patch('app.routes.get_top_100')
+    def test_scraper_failure_handling(self, mock_scraper, mock_spotify_class, client):
         """Test obsługi błędu scrapera"""
         mock_scraper.side_effect = Exception("Billboard unavailable")
         
@@ -69,9 +69,9 @@ class TestErrorHandling:
         assert response.status_code == 200
         assert b'Failed' in response.data or b'error' in response.data.lower()
     
-    @patch('app.routes.get_top_100')
     @patch('app.routes.SpotifyClient')
-    def test_spotify_failure_handling(self, mock_spotify_class, mock_scraper, client):
+    @patch('app.routes.get_top_100')
+    def test_spotify_failure_handling(self, mock_scraper, mock_spotify_class, client):
         """Test obsługi błędu Spotify"""
         mock_scraper.return_value = ['Song 1', 'Song 2']
         
