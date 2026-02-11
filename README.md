@@ -1,5 +1,7 @@
 # 🎵 Spotify Playlist Creator from Billboard Hot 100
 
+[![Tests](https://github.com/NinerMG/Playlist_Scraper_Spotify/actions/workflows/tests.yml/badge.svg)](https://github.com/NinerMG/Playlist_Scraper_Spotify/actions/workflows/tests.yml)
+
 Aplikacja webowa Flask, która tworzy playlisty Spotify na podstawie list Billboard Hot 100 z wybranej daty.
 
 ## ✨ Funkcjonalności
@@ -96,9 +98,9 @@ Aplikacja będzie dostępna pod adresem: **http://127.0.0.1:8080**
 
 ## 🧪 Testy
 
-Projekt zawiera kompletny zestaw testów jednostkowych i integracyjnych.
+Projekt zawiera kompletny zestaw testów jednostkowych i integracyjnych, które są automatycznie uruchamiane przez GitHub Actions przy każdym push i pull request.
 
-### Uruchomienie testów
+### Uruchomienie testów lokalnie
 
 ```bash
 # Wszystkie testy
@@ -116,16 +118,30 @@ pytest tests/test_utils.py
 
 ### Statystyki testów
 
-- **Łącznie testów**: 60+
+- **Łącznie testów**: 45
 - **Pliki testowe**: 5 modułów
-- **Pokrycie**: utils, scraper, spotify, routes, integration
+  - `test_utils.py` - Testy funkcji pomocniczych
+  - `test_scraper.py` - Testy scrapera Billboard
+  - `test_spotify.py` - Testy klienta Spotify
+  - `test_routes.py` - Testy endpointów Flask
+  - `test_integration.py` - Testy integracyjne
+- **CI/CD**: GitHub Actions automatycznie uruchamia testy
 
-Zobacz więcej w [`tests/README.md`](tests/README.md)
+### Continuous Integration
+
+Projekt wykorzystuje GitHub Actions do automatycznego testowania:
+- ✅ Uruchamiane przy każdym push
+- ✅ Uruchamiane przy każdym pull request
+- ✅ Testowane na Python 3.10
+- ✅ Status testów widoczny w badge powyżej
 
 ## 📁 Struktura projektu
 
 ```
 Playlist_Scraper_Spotify/
+├── .github/
+│   └── workflows/
+│       └── tests.yml        # GitHub Actions CI/CD
 ├── app/
 │   ├── __init__.py          # Inicjalizacja Flask
 │   ├── routes.py            # Endpointy aplikacji
@@ -133,18 +149,25 @@ Playlist_Scraper_Spotify/
 │   ├── spotify.py           # Klient Spotify API
 │   ├── utils.py             # Funkcje pomocnicze
 │   ├── static/
-│   │   └── style.css        # Style CSS
+│   │   ├── style.css        # Style CSS
+│   │   └── script.js        # JavaScript
 │   └── templates/
 │       ├── base.html        # Szablon bazowy
 │       ├── index.html       # Strona główna
 │       └── playlist_created.html  # Strona sukcesu
 ├── tests/                   # Testy pytest
+│   ├── conftest.py          # Konfiguracja testów
+│   ├── test_utils.py        # Testy utils
+│   ├── test_scraper.py      # Testy scrapera
+│   ├── test_spotify.py      # Testy Spotify API
+│   ├── test_routes.py       # Testy endpointów
+│   └── test_integration.py  # Testy integracyjne
 ├── run.py                   # Entry point aplikacji
-├── main.py                  # Standalone wersja (CLI)
 ├── requirements.txt         # Zależności Python
+├── pytest.ini               # Konfiguracja pytest
 ├── .env                     # Konfiguracja (nie w repozytorium!)
+├── .gitignore              # Pliki ignorowane przez git
 └── README.md               # Ten plik
-
 ```
 
 ## 🛠️ Technologie
@@ -168,7 +191,19 @@ Playlist_Scraper_Spotify/
 - Aplikacja wymaga połączenia z internetem (Billboard i Spotify API)
 - Niektóre utwory mogą nie być dostępne na Spotify
 - Billboard Hot 100 istnieje od **4 sierpnia 1958 roku**
-- Aplikacja jest w trybie **development** - nie używaj w produkcji bez odpowiedniej konfiguracji
+
+## 🤝 Rozwój projektu
+
+### Uruchomienie testów przed commitem
+
+```bash
+pytest -v
+```
+
+### GitHub Actions
+
+Projekt wykorzystuje automatyczne testy CI/CD. Każdy commit i pull request jest automatycznie testowany. Sprawdź status testów w zakładce "Actions" na GitHubie lub kliknij w badge na górze README.
+
 
 
 
