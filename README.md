@@ -170,7 +170,5 @@ Playlist_Scraper_Spotify/
 - Billboard Hot 100 istnieje od **4 sierpnia 1958 roku**
 - Aplikacja jest w trybie **development** - nie używaj w produkcji bez odpowiedniej konfiguracji
 
-## 📝 Licencja
 
-Ten projekt jest dostępny dla celów edukacyjnych i osobistych.
 
