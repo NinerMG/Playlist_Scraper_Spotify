@@ -1,4 +1,4 @@
-ame: GitHub Actions for Python App Playlist Scraper Spotify
+name: GitHub Actions for Python App Playlist Scraper Spotify
 
 on:
   push:
